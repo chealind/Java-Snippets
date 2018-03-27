@@ -1,2 +1,2 @@
-# java-day
+# Java-day
 Java code snippets
