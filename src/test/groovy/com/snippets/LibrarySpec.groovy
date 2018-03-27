@@ -25,4 +25,20 @@ class LibrarySpec extends Specification {
         "sorrow"      || "rr"
         "frustration" || "r"
     }
+
+    @Unroll
+    def "should decode number from binary"() {
+        expect:
+        lib.binaryToInt(input) == result
+
+        where:
+        input                 || result
+        [0, 0, 0, 1] as int[] || 1
+        [0, 0, 1, 0] as int[] || 2
+        [0, 1, 0, 1] as int[] || 5
+        [0, 1, 1, 0] as int[] || 6
+        [1, 0, 0, 1] as int[] || 9
+        [1, 0, 1, 1] as int[] || 11
+        [1, 1, 1, 1] as int[] || 15
+    }
 }
