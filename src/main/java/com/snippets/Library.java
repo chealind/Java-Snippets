@@ -7,6 +7,13 @@ package com.snippets;
  */
 public class Library {
 
+    /**
+     * Locate middle character(s) in given string.
+     * Reference: https://www.codewars.com/kata/get-the-middle-character
+     *
+     * @param s input string.
+     * @return middle character(s).
+     */
     public String middleCharacter(String s) {
         int N = s.length();
         if (N < 2) return s;
