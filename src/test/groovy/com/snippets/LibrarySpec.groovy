@@ -1,6 +1,7 @@
 package com.snippets
 
 import spock.lang.Specification
+import spock.lang.Unroll
 
 /**
  * Test specification for java code.
@@ -8,15 +9,20 @@ import spock.lang.Specification
  * @author Bohdan Bachkala on 27-Mar-18.
  */
 class LibrarySpec extends Specification {
+    def lib = [] as Library
 
-    def "should return true"() {
-        given:
-        def lib = [] as Library
+    @Unroll
+    def "should return middle character"() {
+        expect:
+        lib.middleCharacter(input) == result
 
-        when:
-        def result = lib.method()
-
-        then:
-        result
+        where:
+        input         || result
+        ""            || ""
+        "a"           || "a"
+        "sun"         || "u"
+        "lake"        || "ak"
+        "sorrow"      || "rr"
+        "frustration" || "r"
     }
 }
