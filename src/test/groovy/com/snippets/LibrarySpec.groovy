@@ -41,4 +41,15 @@ class LibrarySpec extends Specification {
         [1, 0, 1, 1] as int[] || 11
         [1, 1, 1, 1] as int[] || 15
     }
+
+    @Unroll
+    def "should perform binary search"() {
+        expect:
+        lib.binarySearch(array, value) == result
+
+        where:
+        array                                     | value || result
+        [10, 11, 12, 16, 18, 23, 29, 33] as int[] | 12    || 2
+        [10, 11, 12, 16, 18, 23, 29, 33] as int[] | 54    || -1
+    }
 }

@@ -11,6 +11,9 @@ Java code snippets
 ### Array
 * [Binary to number](#binary-to-number)
 
+### Algorithms
+* [BinarySearch](#binarysearch)
+
 ## String
 
 ### Locate middle character
@@ -39,6 +42,30 @@ Java code snippets
             }
         }
         return result;
+    }
+```
+
+[⬆ back to top](#table-of-contents)
+
+## Algorithms
+
+### BinarySearch
+
+```java
+    public int binarySearch(int[] array, int value) {
+        return rank(array, value, 0, array.length - 1);
+    }
+    
+    private int rank(int[] array, int value, int lo, int hi) {
+        if (lo > hi) return -1;
+        int mid = lo + (hi - lo) / 2;
+        if (value > array[mid]) {
+            return rank(array, value, mid + 1, hi);
+        } else if (value < array[mid]) {
+            return rank(array, value, lo, mid - 1);
+        } else {
+            return mid;
+        }
     }
 ```
 

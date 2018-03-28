@@ -37,4 +37,28 @@ public class Library {
         }
         return result;
     }
+
+    /**
+     * Recursive implementation of the binary search algorithm.
+     * Reference: https://www.geeksforgeeks.org/binary-search/
+     *
+     * @param array array of values.
+     * @param value element to search for.
+     * @return index of an element in the array, if there is no element {@literal -1}.
+     */
+    public int binarySearch(int[] array, int value) {
+        return rank(array, value, 0, array.length - 1);
+    }
+
+    private int rank(int[] array, int value, int lo, int hi) {
+        if (lo > hi) return -1;
+        int mid = lo + (hi - lo) / 2;
+        if (value > array[mid]) {
+            return rank(array, value, mid + 1, hi);
+        } else if (value < array[mid]) {
+            return rank(array, value, lo, mid - 1);
+        } else {
+            return mid;
+        }
+    }
 }
