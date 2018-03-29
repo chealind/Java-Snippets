@@ -52,4 +52,17 @@ class LibrarySpec extends Specification {
         [10, 11, 12, 16, 18, 23, 29, 33] as int[] | 12    || 2
         [10, 11, 12, 16, 18, 23, 29, 33] as int[] | 54    || -1
     }
+
+    @Unroll
+    def "should compute Collatz Conjecture"() {
+        expect:
+        lib.conjecture(number) == result
+
+        where:
+        number || result
+        20     || 8
+        31     || 107
+        17     || 13
+        170    || 11
+    }
 }

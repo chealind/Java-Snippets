@@ -61,4 +61,20 @@ public class Library {
             return mid;
         }
     }
+
+    /**
+     * Computes Collatz Conjecture.
+     * Reference: https://en.wikipedia.org/wiki/Collatz_conjecture
+     *
+     * @param n natural number.
+     * @return length of a Collatz Conjecture.
+     */
+    public long conjecture(long n) {
+        long count = 1;
+        while (n != 1) {
+            n = (n % 2 == 0) ? n / 2 : n * 3 + 1;
+            ++count;
+        }
+        return count;
+    }
 }

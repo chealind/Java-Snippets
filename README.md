@@ -13,6 +13,7 @@ Java code snippets
 
 ### Algorithms
 * [BinarySearch](#binarysearch)
+* [Collatz Conjecture](#collatz-conjecture)
 
 ## String
 
@@ -66,6 +67,19 @@ Java code snippets
         } else {
             return mid;
         }
+    }
+```
+
+### Collatz Conjecture
+
+```java
+    public long conjecture(long n) {
+        long count = 1;
+        while (n != 1) {
+            n = (n % 2 == 0) ? n / 2 : n * 3 + 1;
+            ++count;
+        }
+        return count;
     }
 ```
 
