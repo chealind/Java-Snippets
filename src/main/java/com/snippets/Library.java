@@ -1,5 +1,8 @@
 package com.snippets;
 
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
 /**
  * Java snippets.
  *
@@ -76,5 +79,26 @@ public class Library {
             ++count;
         }
         return count;
+    }
+
+    /**
+     * Abbreviates given string.
+     * e.g. internationalization => i18n
+     * Reference: https://www.codewars.com/kata/word-a10n-abbreviation
+     *
+     * @param s string to abbreviate.
+     * @return abbreviated string.
+     */
+    public String abbreviate(String s) {
+        Pattern p = Pattern.compile("[A-Za-z]{4,}");
+        Matcher m = p.matcher(s);
+
+        while (m.find()) {
+            String word = m.group();
+            int N = word.length();
+            String abbreviation = word.substring(0, 1) + String.valueOf(N - 2) + word.substring(N - 1, N);
+            s = s.replaceFirst(word, abbreviation);
+        }
+        return s;
     }
 }

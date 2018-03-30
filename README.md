@@ -7,6 +7,7 @@ Java code snippets
 
 ### String
 * [Locate middle character](#locate-middle-character)
+* [Abbreviate word](#abbreviate-word)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -24,6 +25,23 @@ Java code snippets
         int N = s.length();
         if (N < 2) return s;
         return N % 2 == 0 ? s.substring(N / 2 - 1, N / 2 + 1) : String.valueOf(s.charAt(N / 2));
+    }
+```
+
+### Abbreviate word
+
+```java
+    public String abbreviate(String s) {
+        Pattern p = Pattern.compile("[A-Za-z]{4,}");
+        Matcher m = p.matcher(s);
+
+        while (m.find()) {
+            String word = m.group();
+            int N = word.length();
+            String abbreviation = word.substring(0, 1) + String.valueOf(N - 2) + word.substring(N - 1, N);
+            s = s.replaceFirst(word, abbreviation);
+        }
+        return s;
     }
 ```
 

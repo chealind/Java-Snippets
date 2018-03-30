@@ -65,4 +65,15 @@ class LibrarySpec extends Specification {
         17     || 13
         170    || 11
     }
+
+    @Unroll
+    def "should abbreviate string"() {
+        expect:
+        lib.abbreviate(s) == result
+
+        where:
+        s                                || result
+        "internationalization"           || "i18n"
+        "elephant-rides are really fun!" || "e6t-r3s are r4y fun!"
+    }
 }
