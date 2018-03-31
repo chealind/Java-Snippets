@@ -15,6 +15,7 @@ Java code snippets
 ### Algorithms
 * [BinarySearch](#binarysearch)
 * [Collatz Conjecture](#collatz-conjecture)
+* [Number Expanded Form](#number-expanded-form)
 
 ## String
 
@@ -98,6 +99,23 @@ Java code snippets
             ++count;
         }
         return count;
+    }
+```
+
+### Number Expanded Form
+
+```java
+    public String toExpandedForm(int n) {
+        int e = 1;
+        StringBuilder result = new StringBuilder();
+    
+        while (n != 0) {
+            int k = n % 10;
+            if (k != 0) result.insert(0, " + " + k * e);
+            e *= 10;
+            n /= 10;
+        }
+        return result.substring(3);
     }
 ```
 

@@ -101,4 +101,24 @@ public class Library {
         }
         return s;
     }
+
+    /**
+     * Convert given number to it's expanded representation.
+     * Reference: https://www.codewars.com/kata/write-number-in-expanded-form
+     *
+     * @param n natural number.
+     * @return number in expanded form.
+     */
+    public String toExpandedForm(int n) {
+        int e = 1;
+        StringBuilder result = new StringBuilder();
+
+        while (n != 0) {
+            int k = n % 10;
+            if (k != 0) result.insert(0, " + " + k * e);
+            e *= 10;
+            n /= 10;
+        }
+        return result.substring(3);
+    }
 }

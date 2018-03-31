@@ -76,4 +76,16 @@ class LibrarySpec extends Specification {
         "internationalization"           || "i18n"
         "elephant-rides are really fun!" || "e6t-r3s are r4y fun!"
     }
+
+    @Unroll
+    def "should convert number to expanded form"() {
+        expect:
+        lib.toExpandedForm(number) == result
+
+        where:
+        number || result
+        21     || "20 + 1"
+        145    || "100 + 40 + 5"
+        985041 || "900000 + 80000 + 5000 + 40 + 1"
+    }
 }
