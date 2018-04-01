@@ -1,5 +1,7 @@
 package com.snippets;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -120,5 +122,34 @@ public class Library {
             n /= 10;
         }
         return result.substring(3);
+    }
+
+    /**
+     * Split and add both sides of an array together.
+     * Reference: https://www.codewars.com/kata/split-and-then-add-both-sides-of-an-array-together
+     *
+     * @param numbers arrays of integers.
+     * @param n       number of splits.
+     * @return reduced array.
+     */
+    public int[] splitAndAdd(int[] numbers, int n) {
+        List<Integer> list = new ArrayList<>();
+        for (int entry : numbers) {
+            list.add(entry);
+        }
+
+        while (n > 0) {
+            int loop = list.size() / 2;
+            int offset = list.size() - loop - 1;
+            for (int i = 0; i < loop; i++) {
+                int elem = list.remove(0);
+                list.set(offset, list.get(offset) + elem);
+            }
+            --n;
+        }
+
+        return list.stream()
+                .mapToInt(i -> i)
+                .toArray();
     }
 }

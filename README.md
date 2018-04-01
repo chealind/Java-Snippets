@@ -11,6 +11,7 @@ Java code snippets
 
 ### Array
 * [Binary to number](#binary-to-number)
+* [Split and Add](#split-and-add)
 
 ### Algorithms
 * [BinarySearch](#binarysearch)
@@ -62,6 +63,31 @@ Java code snippets
             }
         }
         return result;
+    }
+```
+
+### Split and Add
+
+```java
+    public int[] splitAndAdd(int[] numbers, int n) {
+        List<Integer> list = new ArrayList<>();
+        for (int entry : numbers) {
+            list.add(entry);
+        }
+    
+        while (n > 0) {
+            int loop = list.size() / 2;
+            int offset = list.size() - loop - 1;
+            for (int i = 0; i < loop; i++) {
+                int elem = list.remove(0);
+                list.set(offset, list.get(offset) + elem);
+            }
+            --n;
+        }
+    
+        return list.stream()
+                  .mapToInt(i -> i)
+                  .toArray();
     }
 ```
 

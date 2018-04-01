@@ -88,4 +88,18 @@ class LibrarySpec extends Specification {
         145    || "100 + 40 + 5"
         985041 || "900000 + 80000 + 5000 + 40 + 1"
     }
+
+    @Unroll
+    def "should split and add array"() {
+        expect:
+        lib.splitAndAdd(array, n) == result
+
+        where:
+        array                                                                  | n  || result
+        [1, 2, 3, 4, 5] as int[]                                               | 2  || [5, 10] as int[]
+        [1, 2, 3, 4, 5] as int[]                                               | 3  || [15] as int[]
+        [32, 45, 43, 23, 54, 23, 54, 34] as int[]                              | 2  || [183, 125] as int[]
+        [3, 234, 25, 345, 45, 34, 234, 235, 345] as int[]                      | 3  || [305, 1195] as int[]
+        [23, 345, 345, 345, 34536, 567, 568, 6, 34536, 54, 7546, 456] as int[] | 20 || [79327] as int[]
+    }
 }
