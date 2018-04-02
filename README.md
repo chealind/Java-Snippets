@@ -20,6 +20,7 @@ Java code snippets
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
+* [Integer Depth](#integer-depth)
 
 ## String
 
@@ -149,6 +150,23 @@ Java code snippets
             n /= 10;
         }
         return result.substring(3);
+    }
+```
+
+### Integer Depth
+
+```java
+    public int computeDepth(int n) {
+        Set<Integer> digits = new HashSet<>();
+        int depth = 0;
+        for (int i = 1; digits.size() < 10; i++, depth++) {
+            int k = n * i;
+            while (k != 0) {
+                digits.add(k % 10);
+                k /= 10;
+            }
+        }
+        return depth;
     }
 ```
 

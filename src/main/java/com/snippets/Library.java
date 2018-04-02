@@ -1,7 +1,9 @@
 package com.snippets;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -151,5 +153,24 @@ public class Library {
         return list.stream()
                 .mapToInt(i -> i)
                 .toArray();
+    }
+
+    /**
+     * Compute depth for the given number.
+     *
+     * @param n natural number greater then zero.
+     * @return depth for the given number.
+     */
+    public int computeDepth(int n) {
+        Set<Integer> digits = new HashSet<>();
+        int depth = 0;
+        for (int i = 1; digits.size() < 10; i++, depth++) {
+            int k = n * i;
+            while (k != 0) {
+                digits.add(k % 10);
+                k /= 10;
+            }
+        }
+        return depth;
     }
 }

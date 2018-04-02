@@ -102,4 +102,18 @@ class LibrarySpec extends Specification {
         [3, 234, 25, 345, 45, 34, 234, 235, 345] as int[]                      | 3  || [305, 1195] as int[]
         [23, 345, 345, 345, 34536, 567, 568, 6, 34536, 54, 7546, 456] as int[] | 20 || [79327] as int[]
     }
+
+    @Unroll
+    def "should compute number depth"() {
+        expect:
+        lib.computeDepth(number) == result
+
+        where:
+        number || result
+        42     || 9
+        1      || 10
+        31     || 10
+        17     || 7
+        170    || 7
+    }
 }
