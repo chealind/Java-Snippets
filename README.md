@@ -18,6 +18,9 @@ Java code snippets
 * [Collatz Conjecture](#collatz-conjecture)
 * [Number Expanded Form](#number-expanded-form)
 
+### Number
+* [Number Expanded Form](#number-expanded-form)
+
 ## String
 
 ### Locate middle character
@@ -93,7 +96,7 @@ Java code snippets
 
 [⬆ back to top](#table-of-contents)
 
-## Algorithms
+## Algorithm
 
 ### BinarySearch
 
@@ -127,6 +130,10 @@ Java code snippets
         return count;
     }
 ```
+
+[⬆ back to top](#table-of-contents)
+
+## Number
 
 ### Number Expanded Form
 
