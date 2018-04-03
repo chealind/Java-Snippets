@@ -17,6 +17,7 @@ Java code snippets
 * [BinarySearch](#binarysearch)
 * [Collatz Conjecture](#collatz-conjecture)
 * [Number Expanded Form](#number-expanded-form)
+* [Compute Best Sum](#compute-best-sum)
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
@@ -167,6 +168,40 @@ Java code snippets
             }
         }
         return depth;
+    }
+```
+
+### Compute Best Sum
+
+```java
+    public int bestSum(int limit, int k, List<Integer> list) {
+        int[] dist = list.stream().mapToInt(d -> d).toArray();
+        int[] subset = new int[k];
+        List<Integer> totals = new ArrayList<>();
+
+        computeTotals(dist, 0, subset, 0, k, totals, limit);
+
+        return totals.stream().max(Integer::compareTo).orElse(-1);
+    }
+
+    public void computeTotals(int[] dist, int i, int[] subset, int j, int k, List<Integer> totals, int limit) {
+        if (j == k) { // subset is full
+            int subTotal = 0;
+            for (int m = 0; m < k; m++) {
+                subTotal += subset[m];
+            }
+            if (subTotal <= limit) {
+                totals.add(subTotal);
+            }
+            return;
+        }
+
+        if (i >= dist.length) return;
+
+        subset[j] = dist[i];
+        computeTotals(dist, i + 1, subset, j + 1, k, totals, limit);
+
+        computeTotals(dist, i + 1, subset, j, k, totals, limit);
     }
 ```
 

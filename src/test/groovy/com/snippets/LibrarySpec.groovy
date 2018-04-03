@@ -116,4 +116,16 @@ class LibrarySpec extends Specification {
         17     || 7
         170    || 7
     }
+
+    @Unroll
+    def "should compute best sub set sum"() {
+        expect:
+        lib.bestSum(limit, k, list) == result
+
+        where:
+        limit | k | list                         || result
+        174   | 3 | [50, 55, 57, 58, 60]         || 173
+        163   | 3 | [50]                         || -1
+        230   | 3 | [91, 74, 73, 85, 73, 81, 87] || 228
+    }
 }

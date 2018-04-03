@@ -173,4 +173,44 @@ public class Library {
         }
         return depth;
     }
+
+
+    /**
+     * Compute best sum of {@code k} subset for the given {@code list}.
+     * Reference: https://www.codewars.com/kata/55e7280b40e1c4a06d0000aa
+     *
+     * @param limit maximum sum.
+     * @param k     length of a sub set.
+     * @param list  set of numbers.
+     * @return biggest sum of k integers up to the limit.
+     */
+    public int bestSum(int limit, int k, List<Integer> list) {
+        int[] dist = list.stream().mapToInt(d -> d).toArray();
+        int[] subset = new int[k];
+        List<Integer> totals = new ArrayList<>();
+
+        computeTotals(dist, 0, subset, 0, k, totals, limit);
+
+        return totals.stream().max(Integer::compareTo).orElse(-1);
+    }
+
+    public void computeTotals(int[] dist, int i, int[] subset, int j, int k, List<Integer> totals, int limit) {
+        if (j == k) { // subset is full
+            int subTotal = 0;
+            for (int m = 0; m < k; m++) {
+                subTotal += subset[m];
+            }
+            if (subTotal <= limit) {
+                totals.add(subTotal);
+            }
+            return;
+        }
+
+        if (i >= dist.length) return;
+
+        subset[j] = dist[i];
+        computeTotals(dist, i + 1, subset, j + 1, k, totals, limit);
+
+        computeTotals(dist, i + 1, subset, j, k, totals, limit);
+    }
 }
