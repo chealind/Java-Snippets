@@ -213,4 +213,24 @@ public class Library {
 
         computeTotals(dist, i + 1, subset, j, k, totals, limit);
     }
+
+    /**
+     * Compute product of consecutive fibonacci numbers.
+     * Reference: https://www.codewars.com/kata/product-of-consecutive-fib-numbers
+     *
+     * @param n number's product upper bound.
+     * @return pair of consecutive fibonacci numbers and a flag which
+     * is {@literal 1} if upper bound was matched and {@literal 0} otherwise.
+     */
+    public long[] productFib(long n) {
+        long current = 0L;
+        long next = 1L;
+        long temp;
+        while (current * next < n) {
+            temp = current;
+            current = next;
+            next = temp + next;
+        }
+        return new long[]{current, next, current * next == n ? 1 : 0};
+    }
 }

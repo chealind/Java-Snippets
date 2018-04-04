@@ -128,4 +128,15 @@ class LibrarySpec extends Specification {
         163   | 3 | [50]                         || -1
         230   | 3 | [91, 74, 73, 85, 73, 81, 87] || 228
     }
+
+    @Unroll
+    def "should compute fibonacci nubmer's product"() {
+        expect:
+        lib.productFib(n) == result
+
+        where:
+        n    || result
+        4895 || [55, 89, 1] as long[]
+        5895 || [89, 144, 0] as long[]
+    }
 }
