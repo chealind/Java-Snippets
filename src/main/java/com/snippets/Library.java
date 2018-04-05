@@ -233,4 +233,33 @@ public class Library {
         }
         return new long[]{current, next, current * next == n ? 1 : 0};
     }
+
+    /**
+     * Searches for gap in prime numbers.
+     *
+     * @param gap   length between two prime numbers.
+     * @param start start point of search.
+     * @param end   end point of search.
+     * @return two prime numbers if gap was found, {@literal null} otherwise.
+     */
+    public long[] gap(long gap, long start, int end) {
+        long prev = Long.MIN_VALUE;
+        for (long k = start; k < end; k++) {
+            if (isPrime(k)) {
+                if (k - prev == gap) {
+                    return new long[]{prev, k};
+                }
+                prev = k;
+            }
+        }
+        return null;
+    }
+
+    public boolean isPrime(long n) {
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
+    }
 }

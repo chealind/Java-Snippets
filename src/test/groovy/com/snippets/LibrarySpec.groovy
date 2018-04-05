@@ -139,4 +139,17 @@ class LibrarySpec extends Specification {
         4895 || [55, 89, 1] as long[]
         5895 || [89, 144, 0] as long[]
     }
+
+    @Unroll
+    def "should search for gap in primes"() {
+        expect:
+        lib.gap(gap, start, end) == result
+
+        where:
+        gap | start | end || result
+        2   | 100   | 110 || [101, 103] as long[]
+        4   | 100   | 110 || [103, 107] as long[]
+        6   | 100   | 110 || null
+        8   | 300   | 400 || [359, 367] as long[]
+    }
 }

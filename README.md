@@ -23,6 +23,7 @@ Java code snippets
 ### Number
 * [Number Expanded Form](#number-expanded-form)
 * [Integer Depth](#integer-depth)
+* [Gap In Primes](#gap-in-primes)
 
 ## String
 
@@ -218,6 +219,31 @@ Java code snippets
             }
         }
         return depth;
+    }
+```
+
+### Gap In Primes
+
+```java
+    public long[] gap(long gap, long start, int end) {
+        long prev = Long.MIN_VALUE;
+        for (long k = start; k < end; k++) {
+            if (isPrime(k)) {
+                if (k - prev == gap) {
+                    return new long[]{prev, k};
+                }
+                prev = k;
+            }
+        }
+        return null;
+    }
+
+    public boolean isPrime(long n) {
+        for (int i = 2; i < n; i++) {
+            if (n % i == 0)
+                return false;
+        }
+        return true;
     }
 ```
 
