@@ -54,6 +54,17 @@ Java code snippets
     }
 ```
 
+### Convert CamelCase
+
+```java
+    public String toCamelCase(String s, String d) {
+        String[] words = s.split(d);
+        return Arrays.stream(words, 1, words.length)
+                .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
+                .reduce(words[0], String::concat);
+    }
+```
+
 [⬆ back to top](#table-of-contents)
 
 ## Array

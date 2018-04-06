@@ -152,4 +152,15 @@ class LibrarySpec extends Specification {
         6   | 100   | 110 || null
         8   | 300   | 400 || [359, 367] as long[]
     }
+
+    @Unroll
+    def "should convert string to camel case"() {
+        expect:
+        lib.toCamelCase(string, delimeter) == result
+
+        where:
+        string                | delimeter || result
+        "the_Stealth_Warrior" | "_"       || "theStealthWarrior"
+        "The-Stealth-Warrior" | "-"       || "TheStealthWarrior"
+    }
 }

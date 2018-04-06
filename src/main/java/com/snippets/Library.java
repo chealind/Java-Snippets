@@ -1,6 +1,7 @@
 package com.snippets;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -261,5 +262,20 @@ public class Library {
                 return false;
         }
         return true;
+    }
+
+    /**
+     * Convert string to camelCase.
+     * Reference: https://www.codewars.com/kata/convert-string-to-camel-case
+     *
+     * @param s string to convert.
+     * @param d word delimiter.
+     * @return string in camelCase.
+     */
+    public String toCamelCase(String s, String d) {
+        String[] words = s.split(d);
+        return Arrays.stream(words, 1, words.length)
+                .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
+                .reduce(words[0], String::concat);
     }
 }
