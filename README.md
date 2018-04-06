@@ -8,6 +8,7 @@ Java code snippets
 ### String
 * [Locate middle character](#locate-middle-character)
 * [Abbreviate word](#abbreviate-word)
+* [Convert CamelCase](#convert-camelcase)
 
 ### Array
 * [Binary to number](#binary-to-number)
