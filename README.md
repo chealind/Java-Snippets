@@ -9,6 +9,7 @@ Java code snippets
 * [Locate middle character](#locate-middle-character)
 * [Abbreviate word](#abbreviate-word)
 * [Convert CamelCase](#convert-camelcase)
+* [Reverse words](#reverse-words)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -63,6 +64,16 @@ Java code snippets
         return Arrays.stream(words, 1, words.length)
                 .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
                 .reduce(words[0], String::concat);
+    }
+```
+
+### Reverse words
+
+```java
+    public String reverseWord(String s, String d) {
+        return Arrays.stream(s.split(d))
+                .reduce((a, b) -> b + d + a)
+                .get();
     }
 ```
 

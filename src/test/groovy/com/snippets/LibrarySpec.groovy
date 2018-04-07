@@ -163,4 +163,15 @@ class LibrarySpec extends Specification {
         "the_Stealth_Warrior" | "_"       || "theStealthWarrior"
         "The-Stealth-Warrior" | "-"       || "TheStealthWarrior"
     }
+
+    @Unroll
+    def "should reverse words order"() {
+        expect:
+        lib.reverseWord(string, delimeter) == result
+
+        where:
+        string                | delimeter || result
+        "I like eating" | " "       || "eating like I"
+        "The-world-is-nice" | "-"       || "nice-is-world-The"
+    }
 }

@@ -278,4 +278,18 @@ public class Library {
                 .map(w -> w.substring(0, 1).toUpperCase() + w.substring(1))
                 .reduce(words[0], String::concat);
     }
+
+    /**
+     * Reverse words in a given string.
+     * Reference: https://www.codewars.com/kata/reversed-words
+     *
+     * @param s words separated by delimiter.
+     * @param d word delimiter.
+     * @return reverse order of words.
+     */
+    public String reverseWord(String s, String d) {
+        return Arrays.stream(s.split(d))
+                .reduce((a, b) -> b + d + a)
+                .get();
+    }
 }
