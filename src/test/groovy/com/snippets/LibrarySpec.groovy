@@ -170,8 +170,8 @@ class LibrarySpec extends Specification {
         lib.reverseWord(string, delimeter) == result
 
         where:
-        string                | delimeter || result
-        "I like eating" | " "       || "eating like I"
+        string              | delimeter || result
+        "I like eating"     | " "       || "eating like I"
         "The-world-is-nice" | "-"       || "nice-is-world-The"
     }
 }
