@@ -154,15 +154,15 @@ Java code snippets
         int v = 1, minRow = 0, minCol = 0, maxRow = n - 1, maxCol = n - 1;
 
         while (v <= n * n) {
-            // complete top minRow
+            // complete top row
             for (int k = minCol; k <= maxCol; k++) {
                 arr[minRow][k] = v++;
             }
-            // complete top minCol
+            // complete top col
             for (int k = minRow + 1; k <= maxRow; k++) {
                 arr[k][maxCol] = v++;
             }
-            // complete bottom minRow
+            // complete bottom row
             for (int k = maxCol - 1; k >= minCol; k--) {
                 arr[maxRow][k] = v++;
             }
