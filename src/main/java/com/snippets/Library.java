@@ -2,8 +2,10 @@ package com.snippets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -291,5 +293,32 @@ public class Library {
         return Arrays.stream(s.split(d))
                 .reduce((a, b) -> b + d + a)
                 .get();
+    }
+
+    /**
+     * Returns true if a portion of s1 characters can be rearranged to match s2, otherwise returns false.
+     * Reference: https://www.codewars.com/kata/scramblies
+     *
+     * @param s1 first string of characters.
+     * @param s2 second string of characters.
+     * @return true if a portion of s1 characters can be rearranged to match s2, otherwise returns false.
+     */
+    public boolean scramble(String s1, String s2) {
+        if (s1.length() < s2.length()) return false;
+        if (s1.equals(s2)) return true;
+        Map<String, Integer> letterIndex = new HashMap<>();
+
+        for (String s : s2.split("")) {
+            if (letterIndex.containsKey(s)) letterIndex.put(s, letterIndex.get(s) + 1);
+            else letterIndex.put(s, 1);
+        }
+
+        for (String s : s1.split("")) {
+            if (letterIndex.containsKey(s)) {
+                if (letterIndex.get(s) == 1) letterIndex.remove(s);
+                else letterIndex.put(s, letterIndex.get(s) - 1);
+            }
+        }
+        return letterIndex.size() == 0;
     }
 }

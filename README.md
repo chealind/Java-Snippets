@@ -10,6 +10,7 @@ Java code snippets
 * [Abbreviate word](#abbreviate-word)
 * [Convert CamelCase](#convert-camelcase)
 * [Reverse words](#reverse-words)
+* [Scramble String](#scramble-string)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -74,6 +75,29 @@ Java code snippets
         return Arrays.stream(s.split(d))
                 .reduce((a, b) -> b + d + a)
                 .get();
+    }
+```
+
+### Scramble String
+
+```java
+    public boolean scramble(String s1, String s2) {
+        if (s1.length() < s2.length()) return false;
+        if (s1.equals(s2)) return true;
+        Map<String, Integer> letterIndex = new HashMap<>();
+
+        for (String s : s2.split("")) {
+            if (letterIndex.containsKey(s)) letterIndex.put(s, letterIndex.get(s) + 1);
+            else letterIndex.put(s, 1);
+        }
+
+        for (String s : s1.split("")) {
+            if (letterIndex.containsKey(s)) {
+                if (letterIndex.get(s) == 1) letterIndex.remove(s);
+                else letterIndex.put(s, letterIndex.get(s) - 1);
+            }
+        }
+        return letterIndex.size() == 0;
     }
 ```
 

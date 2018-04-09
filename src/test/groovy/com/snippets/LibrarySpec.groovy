@@ -174,4 +174,19 @@ class LibrarySpec extends Specification {
         "I like eating"     | " "       || "eating like I"
         "The-world-is-nice" | "-"       || "nice-is-world-The"
     }
+
+    @SuppressWarnings("GroovyPointlessBoolean")
+    @Unroll
+    def "should scramble strings"() {
+        expect:
+        lib.scramble(s1, s2) == result
+
+        where:
+        s1                | s2           || result
+        "scriptingjava"   | "javascript" || true
+        "aabbcamaomsccdd" | "commas"     || true
+        "rwer3"           | "severe"     || false
+        "scriptjavx"      | "javascript" || false
+        ""                | ""           || true
+    }
 }
