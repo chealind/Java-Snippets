@@ -15,6 +15,7 @@ Java code snippets
 ### Array
 * [Binary to number](#binary-to-number)
 * [Split and Add](#split-and-add)
+* [Spiral Array](#spiral-array)
 
 ### Algorithms
 * [BinarySearch](#binarysearch)
@@ -142,6 +143,39 @@ Java code snippets
         return list.stream()
                   .mapToInt(i -> i)
                   .toArray();
+    }
+```
+
+### Spiral Array
+
+```java
+    public int[][] getSpiralArray(int n) {
+        int[][] arr = new int[n][n];
+        int v = 1, minRow = 0, minCol = 0, maxRow = n - 1, maxCol = n - 1;
+
+        while (v <= n * n) {
+            // complete top minRow
+            for (int k = minCol; k <= maxCol; k++) {
+                arr[minRow][k] = v++;
+            }
+            // complete top minCol
+            for (int k = minRow + 1; k <= maxRow; k++) {
+                arr[k][maxCol] = v++;
+            }
+            // complete bottom minRow
+            for (int k = maxCol - 1; k >= minCol; k--) {
+                arr[maxRow][k] = v++;
+            }
+            // complete spiral
+            for (int k = maxRow - 1; k >= minRow + 1; k--) {
+                arr[k][minCol] = v++;
+            }
+            minCol++;
+            minRow++;
+            maxCol--;
+            maxRow--;
+        }
+        return arr;
     }
 ```
 
