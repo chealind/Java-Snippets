@@ -364,4 +364,18 @@ public class Library {
         }
         return arr;
     }
+
+    /**
+     * Format time in seconds in readable format.
+     * Reference: https://www.codewars.com/kata/human-readable-time
+     *
+     * @param seconds time in seconds.
+     * @return time in readable format.
+     */
+    public String readableTime(int seconds) {
+        int hour = seconds / 3600;
+        int min = (seconds / 60) % 60;
+        int sec = seconds % 60;
+        return String.format("%02d:%02d:%02d", hour, min, sec);
+    }
 }

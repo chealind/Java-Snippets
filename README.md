@@ -28,6 +28,7 @@ Java code snippets
 * [Number Expanded Form](#number-expanded-form)
 * [Integer Depth](#integer-depth)
 * [Gap In Primes](#gap-in-primes)
+* [Readable Time](#readable-time)
 
 ## String
 
@@ -251,6 +252,7 @@ Java code snippets
 ```
 
 ### Fibonacci Product
+
 ```java
     public long[] productFib(long n) {
         long current = 0L;
@@ -325,6 +327,17 @@ Java code snippets
                 return false;
         }
         return true;
+    }
+```
+
+### Readable Time
+
+```java
+    public String readableTime(int seconds) {
+        int hour = seconds / 3600;
+        int min = (seconds / 60) % 60;
+        int sec = seconds % 60;
+        return String.format("%02d:%02d:%02d", hour, min, sec);
     }
 ```
 
