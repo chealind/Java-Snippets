@@ -2,8 +2,10 @@ package com.snippets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -176,7 +178,6 @@ public class Library {
         }
         return depth;
     }
-
 
     /**
      * Compute best sum of {@code k} subset for the given {@code list}.
@@ -377,5 +378,28 @@ public class Library {
         int min = (seconds / 60) % 60;
         int sec = seconds % 60;
         return String.format("%02d:%02d:%02d", hour, min, sec);
+    }
+
+    /**
+     * Method takes a string of braces, and determines if the order of the braces is valid.
+     *
+     * @param braces string containing braces such as [], {}, ()
+     * @return true if order of braces is valid, false otherwise.
+     */
+    public boolean validBraces(String braces) {
+        final Map<String, String> braceIndex = new HashMap<>();
+        braceIndex.put("(", ")");
+        braceIndex.put("[", "]");
+        braceIndex.put("{", "}");
+
+        final Deque<String> braceStack = new LinkedList<>();
+        for (String brace : braces.split("")) {
+            if (braceIndex.containsKey(brace)) {
+                braceStack.push(braceIndex.get(brace));
+            } else if (braceStack.isEmpty() || !braceStack.pop().equals(brace)) {
+                return false;
+            }
+        }
+        return braceStack.isEmpty();
     }
 }

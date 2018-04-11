@@ -23,6 +23,7 @@ Java code snippets
 * [Number Expanded Form](#number-expanded-form)
 * [Compute Best Sum](#compute-best-sum)
 * [Fibonacci Product](#fibonacci-product)
+* [Valid Braces](#valid-braces)
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
@@ -264,6 +265,27 @@ Java code snippets
             next = temp + next;
         }
         return new long[]{current, next, current * next == n ? 1 : 0};
+    }
+```
+
+### Valid Braces
+
+```java
+    public boolean validBraces(String braces) {
+        final Map<String, String> braceIndex = new HashMap<>();
+        braceIndex.put("(", ")");
+        braceIndex.put("[", "]");
+        braceIndex.put("{", "}");
+
+        final Deque<String> braceStack = new LinkedList<>();
+        for (String brace : braces.split("")) {
+            if (braceIndex.containsKey(brace)) {
+                braceStack.push(braceIndex.get(brace));
+            } else if (braceStack.isEmpty() || !braceStack.pop().equals(brace)) {
+                return false;
+            }
+        }
+        return braceStack.isEmpty();
     }
 ```
 

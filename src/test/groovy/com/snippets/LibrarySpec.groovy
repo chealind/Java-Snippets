@@ -217,4 +217,19 @@ class LibrarySpec extends Specification {
         86399   || "23:59:59"
         359999  || "99:59:59"
     }
+
+    @SuppressWarnings("GroovyPointlessBoolean")
+    @Unroll
+    def "should validate brace order"() {
+        expect:
+        lib.validBraces(braces) == result
+
+        where:
+        braces     || result
+        "(){}[]"   || true
+        "([{}])"   || true
+        "(}"       || false
+        "[(])"     || false
+        "[({})](]" || false
+    }
 }
