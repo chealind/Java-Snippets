@@ -363,4 +363,34 @@ Java code snippets
     }
 ```
 
+### Convert Roman
+
+```java
+    public String convertRoman(int number) {
+        Map<Integer, String> romanIndex = new TreeMap<>(Collections.reverseOrder());
+        romanIndex.put(1000, "M");
+        romanIndex.put(900, "CM");
+        romanIndex.put(500, "D");
+        romanIndex.put(400, "CD");
+        romanIndex.put(100, "C");
+        romanIndex.put(90, "XC");
+        romanIndex.put(50, "L");
+        romanIndex.put(40, "XL");
+        romanIndex.put(10, "X");
+        romanIndex.put(9, "IX");
+        romanIndex.put(5, "V");
+        romanIndex.put(4, "IV");
+        romanIndex.put(1, "I");
+
+        StringBuilder sb = new StringBuilder();
+        for (int n : romanIndex.keySet()) {
+            while (number >= n) {
+                sb.append(romanIndex.get(n));
+                number -= n;
+            }
+        }
+        return sb.toString();
+    }
+```
+
 [⬆ back to top](#table-of-contents)

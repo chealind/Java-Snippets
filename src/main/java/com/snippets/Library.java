@@ -2,6 +2,7 @@ package com.snippets;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -9,6 +10,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -401,5 +403,39 @@ public class Library {
             }
         }
         return braceStack.isEmpty();
+    }
+
+    /**
+     * Convert int number to roman format.
+     * For example: 4 => IV, 9 => IX.
+     * Reference: https://www.codewars.com/kata/roman-numerals-encoder
+     *
+     * @param number integer number.
+     * @return number in roman format.
+     */
+    public String convertRoman(int number) {
+        Map<Integer, String> romanIndex = new TreeMap<>(Collections.reverseOrder());
+        romanIndex.put(1000, "M");
+        romanIndex.put(900, "CM");
+        romanIndex.put(500, "D");
+        romanIndex.put(400, "CD");
+        romanIndex.put(100, "C");
+        romanIndex.put(90, "XC");
+        romanIndex.put(50, "L");
+        romanIndex.put(40, "XL");
+        romanIndex.put(10, "X");
+        romanIndex.put(9, "IX");
+        romanIndex.put(5, "V");
+        romanIndex.put(4, "IV");
+        romanIndex.put(1, "I");
+
+        StringBuilder sb = new StringBuilder();
+        for (int n : romanIndex.keySet()) {
+            while (number >= n) {
+                sb.append(romanIndex.get(n));
+                number -= n;
+            }
+        }
+        return sb.toString();
     }
 }

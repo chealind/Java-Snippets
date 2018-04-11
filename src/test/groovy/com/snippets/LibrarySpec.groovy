@@ -232,4 +232,20 @@ class LibrarySpec extends Specification {
         "[(])"     || false
         "[({})](]" || false
     }
+
+    @Unroll
+    def "should convert to roman style"() {
+        expect:
+        lib.convertRoman(number) == result
+
+        where:
+        number || result
+        1      || "I"
+        4      || "IV"
+        6      || "VI"
+        1000   || "M"
+        1990   || "MCMXC"
+        1666   || "MDCLXVI"
+        2008   || "MMVIII"
+    }
 }
