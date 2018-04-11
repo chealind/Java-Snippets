@@ -30,6 +30,7 @@ Java code snippets
 * [Integer Depth](#integer-depth)
 * [Gap In Primes](#gap-in-primes)
 * [Readable Time](#readable-time)
+* [Convert Roman](#convert-roman)
 
 ## String
 
