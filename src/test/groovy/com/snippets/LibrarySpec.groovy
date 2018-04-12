@@ -80,7 +80,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should convert number to expanded form"() {
         expect:
-        lib.toExpandedForm(number) == result
+        lib.expanded(number) == result
 
         where:
         number || result
@@ -106,7 +106,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should compute number depth"() {
         expect:
-        lib.computeDepth(number) == result
+        lib.depth(number) == result
 
         where:
         number || result
@@ -120,7 +120,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should compute best sub set sum"() {
         expect:
-        lib.bestSum(limit, k, list) == result
+        lib.bestTotal(limit, k, list) == result
 
         where:
         limit | k | list                         || result
@@ -143,7 +143,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should search for gap in primes"() {
         expect:
-        lib.gap(gap, start, end) == result
+        lib.primeGaps(gap, start, end) == result
 
         where:
         gap | start | end || result
@@ -167,7 +167,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should reverse words order"() {
         expect:
-        lib.reverseWord(string, delimeter) == result
+        lib.reverseWords(string, delimeter) == result
 
         where:
         string              | delimeter || result
@@ -193,7 +193,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should create spiral array"() {
         expect:
-        lib.getSpiralArray(n) == result
+        lib.spiral(n) == result
 
         where:
         n || result
@@ -236,7 +236,7 @@ class LibrarySpec extends Specification {
     @Unroll
     def "should convert to roman style"() {
         expect:
-        lib.convertRoman(number) == result
+        lib.romanFormat(number) == result
 
         where:
         number || result

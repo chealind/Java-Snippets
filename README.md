@@ -76,7 +76,7 @@ Java code snippets
 ### Reverse words
 
 ```java
-    public String reverseWord(String s, String d) {
+    public String reverseWords(String s, String d) {
         return Arrays.stream(s.split(d))
                 .reduce((a, b) -> b + d + a)
                 .get();
@@ -153,7 +153,7 @@ Java code snippets
 ### Spiral Array
 
 ```java
-    public int[][] getSpiralArray(int n) {
+    public int[][] spiral(int n) {
         int[][] arr = new int[n][n];
         int v = 1, minRow = 0, minCol = 0, maxRow = n - 1, maxCol = n - 1;
 
@@ -256,7 +256,7 @@ Java code snippets
 ### Compute Best Sum
 
 ```java
-    public int bestSum(int limit, int k, List<Integer> list) {
+    public int bestTotal(int limit, int k, List<Integer> list) {
         int[] dist = list.stream().mapToInt(d -> d).toArray();
         int[] subset = new int[k];
         List<Integer> totals = new ArrayList<>();
@@ -331,7 +331,7 @@ Java code snippets
 ### Number Expanded Form
 
 ```java
-    public String toExpandedForm(int n) {
+    public String expanded(int n) {
         int e = 1;
         StringBuilder result = new StringBuilder();
     
@@ -348,7 +348,7 @@ Java code snippets
 ### Integer Depth
 
 ```java
-    public int computeDepth(int n) {
+    public int depth(int n) {
         Set<Integer> digits = new HashSet<>();
         int depth = 0;
         for (int i = 1; digits.size() < 10; i++, depth++) {
@@ -365,7 +365,7 @@ Java code snippets
 ### Gap In Primes
 
 ```java
-    public long[] gap(long gap, long start, int end) {
+    public long[] primeGaps(long gap, long start, int end) {
         long prev = Long.MIN_VALUE;
         for (long k = start; k < end; k++) {
             if (isPrime(k)) {
@@ -401,7 +401,7 @@ Java code snippets
 ### Convert Roman
 
 ```java
-    public String convertRoman(int number) {
+    public String romanFormat(int number) {
         Map<Integer, String> romanIndex = new TreeMap<>(Collections.reverseOrder());
         romanIndex.put(1000, "M");
         romanIndex.put(900, "CM");

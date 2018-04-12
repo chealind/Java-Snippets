@@ -120,7 +120,7 @@ public class Library {
      * @param n natural number.
      * @return number in expanded form.
      */
-    public String toExpandedForm(int n) {
+    public String expanded(int n) {
         int e = 1;
         StringBuilder result = new StringBuilder();
 
@@ -168,7 +168,7 @@ public class Library {
      * @param n natural number greater then zero.
      * @return depth for the given number.
      */
-    public int computeDepth(int n) {
+    public int depth(int n) {
         Set<Integer> digits = new HashSet<>();
         int depth = 0;
         for (int i = 1; digits.size() < 10; i++, depth++) {
@@ -190,7 +190,7 @@ public class Library {
      * @param list  set of numbers.
      * @return biggest sum of k integers up to the limit.
      */
-    public int bestSum(int limit, int k, List<Integer> list) {
+    public int bestTotal(int limit, int k, List<Integer> list) {
         int[] dist = list.stream().mapToInt(d -> d).toArray();
         int[] subset = new int[k];
         List<Integer> totals = new ArrayList<>();
@@ -248,7 +248,7 @@ public class Library {
      * @param end   end point of search.
      * @return two prime numbers if gap was found, {@literal null} otherwise.
      */
-    public long[] gap(long gap, long start, int end) {
+    public long[] primeGaps(long gap, long start, int end) {
         long prev = Long.MIN_VALUE;
         for (long k = start; k < end; k++) {
             if (isPrime(k)) {
@@ -292,7 +292,7 @@ public class Library {
      * @param d word delimiter.
      * @return reverse order of words.
      */
-    public String reverseWord(String s, String d) {
+    public String reverseWords(String s, String d) {
         return Arrays.stream(s.split(d))
                 .reduce((a, b) -> b + d + a)
                 .get();
@@ -339,7 +339,7 @@ public class Library {
      * @param n array bound.
      * @return spiral array.
      */
-    public int[][] getSpiralArray(int n) {
+    public int[][] spiral(int n) {
         int[][] arr = new int[n][n];
         int v = 1, minRow = 0, minCol = 0, maxRow = n - 1, maxCol = n - 1;
 
@@ -413,7 +413,7 @@ public class Library {
      * @param number integer number.
      * @return number in roman format.
      */
-    public String convertRoman(int number) {
+    public String romanFormat(int number) {
         Map<Integer, String> romanIndex = new TreeMap<>(Collections.reverseOrder());
         romanIndex.put(1000, "M");
         romanIndex.put(900, "CM");
