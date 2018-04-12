@@ -248,4 +248,16 @@ class LibrarySpec extends Specification {
         1666   || "MDCLXVI"
         2008   || "MMVIII"
     }
+
+    @Unroll
+    def "should sort elements of the array (snail)"() {
+        expect:
+        lib.snail(array) == result
+
+        where:
+        array                                        || result
+        [[]] as int[][]                              || [] as int[]
+        [[1, 2, 3], [8, 9, 4], [7, 6, 5]] as int[][] || [1, 2, 3, 4, 5, 6, 7, 8, 9] as int[]
+        [[1, 2, 3], [4, 5, 6], [7, 8, 9]] as int[][] || [1, 2, 3, 6, 9, 8, 7, 4, 5] as int[]
+    }
 }

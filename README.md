@@ -16,6 +16,7 @@ Java code snippets
 * [Binary to number](#binary-to-number)
 * [Split and Add](#split-and-add)
 * [Spiral Array](#spiral-array)
+* [Snail Sort](#snail-sort)
 
 ### Algorithms
 * [BinarySearch](#binarysearch)
@@ -179,6 +180,39 @@ Java code snippets
             maxRow--;
         }
         return arr;
+    }
+```
+
+### Snail Sort
+
+```java
+    public int[] snail(int[][] array) {
+        if (array[0].length == 0) return new int[0];
+
+        int N = array.length;
+        int[] snail = new int[N * N];
+        int minCol = 0, minRow = 0, maxCol = N - 1, maxRow = N - 1;
+        int index = 0;
+
+        while (index < N * N) {
+            for (int i = minCol; i <= maxCol; i++) {
+                snail[index++] = array[minRow][i];
+            }
+            for (int i = minRow + 1; i <= maxRow; i++) {
+                snail[index++] = array[i][maxCol];
+            }
+            for (int i = maxCol - 1; i >= minCol; i--) {
+                snail[index++] = array[maxRow][i];
+            }
+            for (int i = maxRow - 1; i >= minRow + 1; i--) {
+                snail[index++] = array[i][minCol];
+            }
+            minCol++;
+            maxCol--;
+            minRow++;
+            maxRow--;
+        }
+        return snail;
     }
 ```
 

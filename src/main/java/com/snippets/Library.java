@@ -438,4 +438,41 @@ public class Library {
         }
         return sb.toString();
     }
+
+    /**
+     * Given an two dimensional array, returns the array with elements arranged from
+     * outermost elements to the middle element, traveling clockwise.
+     * Reference: https://www.codewars.com/kata/snail
+     *
+     * @param array a two dimensional array.
+     * @return a one dimensional array with sorted elements.
+     */
+    public int[] snail(int[][] array) {
+        if (array[0].length == 0) return new int[0];
+
+        int N = array.length;
+        int[] snail = new int[N * N];
+        int minCol = 0, minRow = 0, maxCol = N - 1, maxRow = N - 1;
+        int index = 0;
+
+        while (index < N * N) {
+            for (int i = minCol; i <= maxCol; i++) {
+                snail[index++] = array[minRow][i];
+            }
+            for (int i = minRow + 1; i <= maxRow; i++) {
+                snail[index++] = array[i][maxCol];
+            }
+            for (int i = maxCol - 1; i >= minCol; i--) {
+                snail[index++] = array[maxRow][i];
+            }
+            for (int i = maxRow - 1; i >= minRow + 1; i--) {
+                snail[index++] = array[i][minCol];
+            }
+            minCol++;
+            maxCol--;
+            minRow++;
+            maxRow--;
+        }
+        return snail;
+    }
 }
