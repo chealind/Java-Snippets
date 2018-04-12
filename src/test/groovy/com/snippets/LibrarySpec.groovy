@@ -260,4 +260,22 @@ class LibrarySpec extends Specification {
         [[1, 2, 3], [8, 9, 4], [7, 6, 5]] as int[][] || [1, 2, 3, 4, 5, 6, 7, 8, 9] as int[]
         [[1, 2, 3], [4, 5, 6], [7, 8, 9]] as int[][] || [1, 2, 3, 6, 9, 8, 7, 4, 5] as int[]
     }
+
+    @Unroll
+    def "should evaluate reverse polish notation"() {
+        expect:
+        lib.evaluatePolish(expression) == result
+
+        where:
+        expression                       || result
+        ""                               || 0
+        "1 2 3"                          || 3
+        "1 2 3.5"                        || 3.5
+        "1 3 +"                          || 4
+        "4 5 *"                          || 20
+        "7 6 -"                          || 1
+        "4 2 /"                          || 2
+        "5 1 2 + 4 * + 3 -"              || 14
+        "15 7 1 1 + - / 3 * 2 1 1 + + -" || 5
+    }
 }

@@ -32,6 +32,7 @@ Java code snippets
 * [Gap In Primes](#gap-in-primes)
 * [Readable Time](#readable-time)
 * [Convert Roman](#convert-roman)
+* [Reverse Polish Notation](#reverse-polish-notation)
 
 ## String
 
@@ -425,6 +426,27 @@ Java code snippets
             }
         }
         return sb.toString();
+    }
+```
+
+### Reverse Polish Notation
+
+```java
+    public double evaluatePolish(String expression) {
+        if (expression.isEmpty()) return 0;
+        Deque<Double> stack = new LinkedList<>();
+
+        Arrays.stream(expression.split(" ")).forEach(s -> {
+            Double b, a;
+            switch(s) {
+                case "+": stack.push(stack.pop() + stack.pop()); break;
+                case "*": stack.push(stack.pop() * stack.pop()); break;
+                case "-": b = stack.pop(); a = stack.pop(); stack.push(a - b); break;
+                case "/": b = stack.pop(); a = stack.pop(); stack.push(a / b); break;
+                default: stack.push(Double.parseDouble(s));
+            }
+        });
+        return stack.pop();
     }
 ```
 
