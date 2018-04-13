@@ -11,10 +11,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeMap;
+import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import static java.lang.String.format;
+import static java.lang.String.valueOf;
 
 /**
  * Java snippets.
@@ -33,7 +35,7 @@ public class Library {
     public String middleCharacter(String s) {
         int N = s.length();
         if (N < 2) return s;
-        return N % 2 == 0 ? s.substring(N / 2 - 1, N / 2 + 1) : String.valueOf(s.charAt(N / 2));
+        return N % 2 == 0 ? s.substring(N / 2 - 1, N / 2 + 1) : valueOf(s.charAt(N / 2));
     }
 
     /**
@@ -109,7 +111,7 @@ public class Library {
         while (m.find()) {
             String word = m.group();
             int N = word.length();
-            String abbreviation = word.substring(0, 1) + String.valueOf(N - 2) + word.substring(N - 1, N);
+            String abbreviation = word.substring(0, 1) + valueOf(N - 2) + word.substring(N - 1, N);
             s = s.replaceFirst(word, abbreviation);
         }
         return s;
@@ -491,12 +493,25 @@ public class Library {
 
         Arrays.stream(expression.split(" ")).forEach(s -> {
             Double b, a;
-            switch(s) {
-                case "+": stack.push(stack.pop() + stack.pop()); break;
-                case "*": stack.push(stack.pop() * stack.pop()); break;
-                case "-": b = stack.pop(); a = stack.pop(); stack.push(a - b); break;
-                case "/": b = stack.pop(); a = stack.pop(); stack.push(a / b); break;
-                default: stack.push(Double.parseDouble(s));
+            switch (s) {
+                case "+":
+                    stack.push(stack.pop() + stack.pop());
+                    break;
+                case "*":
+                    stack.push(stack.pop() * stack.pop());
+                    break;
+                case "-":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(a - b);
+                    break;
+                case "/":
+                    b = stack.pop();
+                    a = stack.pop();
+                    stack.push(a / b);
+                    break;
+                default:
+                    stack.push(Double.parseDouble(s));
             }
         });
         return stack.pop();
@@ -539,5 +554,40 @@ public class Library {
             result.append(format("%d %s", sec, sec == 1 ? "second" : "seconds"));
         }
         return result.toString();
+    }
+
+    /**
+     * Compute total for numbers by prime factors.
+     * Reference: https://www.codewars.com/kata/54d496788776e49e6b00052f
+     *
+     * @param array array of numbers.
+     * @return totals by prime factors.
+     */
+    public String primeFactorTotal(int[] array) {
+        StringBuilder sb = new StringBuilder();
+        Set<Integer> primes = new TreeSet<>();
+        for (int n : array) {
+            primes.addAll(primeFactors(n));
+        }
+        for (int p : primes) {
+            int sum = 0;
+            for (int n : array) {
+                if (n % p == 0) sum += n;
+            }
+            sb.append(format("(%d %d)", p, sum));
+        }
+        return sb.toString();
+    }
+
+    private Set<Integer> primeFactors(int number) {
+        Set<Integer> primeFactors = new HashSet<>();
+        int n = number;
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                primeFactors.add(i);
+                n /= i;
+            }
+        }
+        return primeFactors;
     }
 }

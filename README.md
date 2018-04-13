@@ -25,6 +25,7 @@ Java code snippets
 * [Compute Best Sum](#compute-best-sum)
 * [Fibonacci Product](#fibonacci-product)
 * [Valid Braces](#valid-braces)
+* [Prime Factors](#prime-factors)
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
@@ -323,6 +324,38 @@ Java code snippets
             }
         }
         return braceStack.isEmpty();
+    }
+```
+
+### Prime Factors
+
+```java
+    public String primeFactorTotal(int[] array) {
+        StringBuilder sb = new StringBuilder();
+        Set<Integer> primes = new TreeSet<>();
+        for (int n : array) {
+            primes.addAll(primeFactors(n));
+        }
+        for (int p : primes) {
+            int sum = 0;
+            for (int n : array) {
+                if (n % p == 0) sum += n;
+            }
+            sb.append(format("(%d %d)", p, sum));
+        }
+        return sb.toString();
+    }
+
+    private Set<Integer> primeFactors(int number) {
+        Set<Integer> primeFactors = new HashSet<>();
+        int n = number;
+        for (int i = 2; i <= n; i++) {
+            while (n % i == 0) {
+                primeFactors.add(i);
+                n /= i;
+            }
+        }
+        return primeFactors;
     }
 ```
 

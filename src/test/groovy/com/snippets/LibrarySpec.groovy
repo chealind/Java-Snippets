@@ -296,4 +296,17 @@ class LibrarySpec extends Specification {
         15731080  || "182 days, 1 hour, 44 minutes and 40 seconds"
         0         || "now"
     }
+
+    @Unroll
+    def "should compute divided total"() {
+        expect:
+        lib.primeFactorTotal(array) == result
+
+        where:
+        array                                                       || result
+        [] as int[]                                                 || ""
+        [12, 15] as int[]                                           || "(2 12)(3 27)(5 15)"
+        [15, 21, 24, 30, 45] as int[]                               || "(2 54)(3 135)(5 90)(7 21)"
+        [107, 158, 204, 100, 118, 123, 126, 110, 116, 100] as int[] || "(2 1032)(3 453)(5 310)(7 126)(11 110)(17 204)(29 116)(41 123)(59 118)(79 158)(107 107)"
+    }
 }
