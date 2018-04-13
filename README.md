@@ -33,6 +33,7 @@ Java code snippets
 * [Readable Time](#readable-time)
 * [Convert Roman](#convert-roman)
 * [Reverse Polish Notation](#reverse-polish-notation)
+* [Format Duration](#format-duration)
 
 ## String
 
@@ -447,6 +448,42 @@ Java code snippets
             }
         });
         return stack.pop();
+    }
+```
+
+### Format Duration
+
+```java
+    public String formatDuration(int time) {
+        if (time == 0) return "now";
+        StringBuilder result = new StringBuilder();
+
+        int year = time / 3600 / 24 / 365;
+        int day = time / 3600 / 24 % 365;
+        int hour = time / 3600 % 24;
+        int min = time / 60 % 60;
+        int sec = time % 60;
+
+        if (year > 0) {
+            result.append(format("%d %s", year, year == 1 ? "year" : "years"));
+        }
+        if (day > 0) {
+            if (result.length() > 0) result.append(hour > 0 ? ", " : " and ");
+            result.append(format("%d %s", day, day == 1 ? "day" : "days"));
+        }
+        if (hour > 0) {
+            if (result.length() > 0) result.append(min > 0 ? ", " : " and ");
+            result.append(format("%d %s", hour, hour == 1 ? "hour" : "hours"));
+        }
+        if (min > 0) {
+            if (result.length() > 0) result.append(sec > 0 ? ", " : " and ");
+            result.append(format("%d %s", min, min == 1 ? "minute" : "minutes"));
+        }
+        if (sec > 0) {
+            if (result.length() > 0) result.append(" and ");
+            result.append(format("%d %s", sec, sec == 1 ? "second" : "seconds"));
+        }
+        return result.toString();
     }
 ```
 
