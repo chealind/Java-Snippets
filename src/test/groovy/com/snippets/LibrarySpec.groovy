@@ -309,4 +309,19 @@ class LibrarySpec extends Specification {
         [15, 21, 24, 30, 45] as int[]                               || "(2 54)(3 135)(5 90)(7 21)"
         [107, 158, 204, 100, 118, 123, 126, 110, 116, 100] as int[] || "(2 1032)(3 453)(5 310)(7 126)(11 110)(17 204)(29 116)(41 123)(59 118)(79 158)(107 107)"
     }
+
+    @Unroll
+    def "should reduce to single color"() {
+        expect:
+        lib.triangle(row) == result
+
+        where:
+        row                   || result
+        "B"                   || 'B' as char
+        "GB"                  || 'R' as char
+        "RRR"                 || 'R' as char
+        "RGBG"                || 'B' as char
+        "RBRGBRB"             || 'G' as char
+        "RBRGBRBGGRRRBGBBBGG" || 'G' as char
+    }
 }

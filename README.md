@@ -11,6 +11,7 @@ Java code snippets
 * [Convert CamelCase](#convert-camelcase)
 * [Reverse words](#reverse-words)
 * [Scramble String](#scramble-string)
+* [Colored Triangle](#colored-triangle)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -106,6 +107,28 @@ Java code snippets
             }
         }
         return letterIndex.size() == 0;
+    }
+```
+
+### Colored Triangle
+
+```java
+    public char triangle(String row) {
+        if (row.length() == 1) return row.charAt(0);
+        StringBuilder next = new StringBuilder();
+        String sub;
+        for (int i = 1; i < row.length(); i++) {
+            sub = row.substring(i - 1, i + 1);
+            next.append(nextChar(sub));
+        }
+        return triangle(next.toString());
+    }
+
+    private char nextChar(String s) {
+        if (s.charAt(0) == s.charAt(1)) return s.charAt(0);
+        if (s.contains("R") && s.contains("G")) return 'B';
+        if (s.contains("R") && s.contains("B")) return 'G';
+        return 'R';
     }
 ```
 
