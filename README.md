@@ -12,6 +12,7 @@ Java code snippets
 * [Reverse words](#reverse-words)
 * [Scramble String](#scramble-string)
 * [Colored Triangle](#colored-triangle)
+* [Sort Weight](#sort-weight)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -129,6 +130,20 @@ Java code snippets
         if (s.contains("R") && s.contains("G")) return 'B';
         if (s.contains("R") && s.contains("B")) return 'G';
         return 'R';
+    }
+```
+
+### Sort Weight
+
+```java
+    public String orderWeight(String row) {
+        String[] array = row.split(" ");
+        Arrays.sort(array, (a, b) -> {
+            int aWeight = a.chars().map(Character::getNumericValue).sum();
+            int bWeight = b.chars().map(Character::getNumericValue).sum();
+            return aWeight > bWeight ? 1 : aWeight != bWeight ? -1 : a.compareTo(b);
+        });
+        return String.join(" ", array);
     }
 ```
 

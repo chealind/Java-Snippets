@@ -614,4 +614,21 @@ public class Library {
         if (s.contains("R") && s.contains("B")) return 'G';
         return 'R';
     }
+
+    /**
+     * Sort numbers by its weight.
+     * Reference: https://www.codewars.com/kata/weight-for-weight
+     *
+     * @param row row of numbers.
+     * @return sorted string.
+     */
+    public String orderWeight(String row) {
+        String[] array = row.split(" ");
+        Arrays.sort(array, (a, b) -> {
+            int aWeight = a.chars().map(Character::getNumericValue).sum();
+            int bWeight = b.chars().map(Character::getNumericValue).sum();
+            return aWeight > bWeight ? 1 : aWeight != bWeight ? -1 : a.compareTo(b);
+        });
+        return String.join(" ", array);
+    }
 }
