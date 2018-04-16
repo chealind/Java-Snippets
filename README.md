@@ -37,6 +37,7 @@ Java code snippets
 * [Convert Roman](#convert-roman)
 * [Reverse Polish Notation](#reverse-polish-notation)
 * [Format Duration](#format-duration)
+* [List Squared](#list-squared)
 
 ## String
 
@@ -555,6 +556,28 @@ Java code snippets
             result.append(format("%d %s", sec, sec == 1 ? "second" : "seconds"));
         }
         return result.toString();
+    }
+```
+
+### List Squared
+
+```java
+    public String listSquared(long start, long end) {
+        List<String> list = new ArrayList<>();
+        for (long number = start; number <= end; number++) {
+            long pair = pair(number);
+            if (pair != 0) list.add(String.format("[%d, %d]", number, pair));
+        }
+        return "[" + String.join(", ", list) + "]";
+    }
+
+    private long pair(long n) {
+        long sum = LongStream.range(1, n + 1)
+                .filter(k -> n % k == 0)
+                .map(k -> k * k)
+                .sum();
+        long sqrt = (long) Math.sqrt(sum);
+        return sqrt * sqrt == sum ? sum : 0;
     }
 ```
 
