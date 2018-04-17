@@ -351,4 +351,16 @@ class LibrarySpec extends Specification {
         5000  | 10000 || "[[6237, 45024100], [9799, 96079204], [9855, 113635600]]"
     }
 
+    @Unroll
+    def "should factorize positive number"() {
+        expect:
+        lib.factor(number) == result
+
+        where:
+        number            || result
+        13                || "13 - 1"
+        24                || "2 - 3, 3 - 1"
+        32767             || "7 - 1, 151 - 1, 31 - 1"
+        72057554846356487 || "72057554846356487 - 1"
+    }
 }

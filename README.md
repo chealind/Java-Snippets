@@ -38,6 +38,7 @@ Java code snippets
 * [Reverse Polish Notation](#reverse-polish-notation)
 * [Format Duration](#format-duration)
 * [List Squared](#list-squared)
+* [Factorization](#factorization)
 
 ## String
 
@@ -578,6 +579,26 @@ Java code snippets
                 .sum();
         long sqrt = (long) Math.sqrt(sum);
         return sqrt * sqrt == sum ? sum : 0;
+    }
+```
+
+### Factorization
+
+```java
+    public String factor(long n) {
+        Map<Long, Integer> map = new HashMap<>();
+        for (long k = 2; k * k <= n; k++) {
+            while (n % k == 0) {
+                if (map.containsKey(k)) map.put(k, map.get(k) + 1);
+                else map.put(k, 1);
+                n = n / k;
+            }
+        }
+        if (n > 1) map.put(n, 1);
+        return map.entrySet()
+                .stream()
+                .map(entry -> entry.getKey() + " - " + entry.getValue())
+                .collect(Collectors.joining(", "));
     }
 ```
 

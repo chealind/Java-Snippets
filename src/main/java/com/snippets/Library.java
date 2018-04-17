@@ -14,6 +14,7 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+import java.util.stream.Collectors;
 import java.util.stream.LongStream;
 
 import static java.lang.String.format;
@@ -657,5 +658,28 @@ public class Library {
                 .sum();
         long sqrt = (long) Math.sqrt(sum);
         return sqrt * sqrt == sum ? sum : 0;
+    }
+
+    /**
+     * Prime factorization for a positive number.
+     * Reference: https://www.codewars.com/kata/prime-factorization
+     *
+     * @param n a positive number.
+     * @return prime factorization.
+     */
+    public String factor(long n) {
+        Map<Long, Integer> map = new HashMap<>();
+        for (long k = 2; k * k <= n; k++) {
+            while (n % k == 0) {
+                if (map.containsKey(k)) map.put(k, map.get(k) + 1);
+                else map.put(k, 1);
+                n = n / k;
+            }
+        }
+        if (n > 1) map.put(n, 1);
+        return map.entrySet()
+                .stream()
+                .map(entry -> entry.getKey() + " - " + entry.getValue())
+                .collect(Collectors.joining(", "));
     }
 }
