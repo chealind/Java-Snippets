@@ -39,6 +39,7 @@ Java code snippets
 * [Format Duration](#format-duration)
 * [List Squared](#list-squared)
 * [Factorization](#factorization)
+* [Multiplicative persistence](#multiplicative-persistence)
 
 ## String
 
@@ -599,6 +600,21 @@ Java code snippets
                 .stream()
                 .map(entry -> entry.getKey() + " - " + entry.getValue())
                 .collect(Collectors.joining(", "));
+    }
+```
+
+### Multiplicative persistence
+
+```java
+    public int persistence(long number) {
+        if (number % 10 == number) return 0;
+        long multiplier = 1;
+
+        while (number > 0) {
+            multiplier *= number % 10;
+            number /= 10;
+        }
+        return persistence(multiplier) + 1;
     }
 ```
 

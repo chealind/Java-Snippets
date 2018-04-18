@@ -682,4 +682,22 @@ public class Library {
                 .map(entry -> entry.getKey() + " - " + entry.getValue())
                 .collect(Collectors.joining(", "));
     }
+
+    /**
+     * Compute multiplicative persistence for a number.
+     * Reference: https://www.codewars.com/kata/persistent-bugger
+     *
+     * @param number natural number.
+     * @return multiplicative persistence.
+     */
+    public int persistence(long number) {
+        if (number % 10 == number) return 0;
+        long multiplier = 1;
+
+        while (number > 0) {
+            multiplier *= number % 10;
+            number /= 10;
+        }
+        return persistence(multiplier) + 1;
+    }
 }

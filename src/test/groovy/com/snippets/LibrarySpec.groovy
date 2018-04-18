@@ -363,4 +363,18 @@ class LibrarySpec extends Specification {
         32767             || "7 - 1, 151 - 1, 31 - 1"
         72057554846356487 || "72057554846356487 - 1"
     }
+
+    @Unroll
+    def "should compute multiplicative persistence for a number"() {
+        expect:
+        lib.persistence(number) == result
+
+        where:
+        number || result
+        39     || 3
+        4      || 0
+        25     || 2
+        999    || 4
+        444    || 3
+    }
 }
