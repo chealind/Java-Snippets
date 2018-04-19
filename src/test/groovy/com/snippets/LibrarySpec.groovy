@@ -377,4 +377,18 @@ class LibrarySpec extends Specification {
         999    || 4
         444    || 3
     }
+
+    @Unroll
+    def "should compute next queue element"() {
+        expect:
+        lib.nextQueue(arr, n) == result
+
+        where:
+        arr                                                             | n        || result
+        ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 1        || "Sheldon"
+        ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 6        || "Sheldon"
+        ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 1802     || "Penny"
+        ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 534      || "Rajesh"
+        ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 28643950 || "Leonard"
+    }
 }

@@ -28,6 +28,7 @@ Java code snippets
 * [Fibonacci Product](#fibonacci-product)
 * [Valid Braces](#valid-braces)
 * [Prime Factors](#prime-factors)
+* [Next In Queue](#next-in-queue)
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
@@ -397,6 +398,22 @@ Java code snippets
             }
         }
         return primeFactors;
+    }
+```
+
+### Next In Queue
+
+```java
+    public String nextQueue(String[] arr, int n) {
+        if (arr.length == 0) return "";
+        int next = 5, prev = 1;
+
+        while (n - next > 0) {
+            n -= next;
+            next *= 2;
+            prev *= 2;
+        }
+        return arr[(n - 1) / prev];
     }
 ```
 

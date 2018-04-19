@@ -700,4 +700,23 @@ public class Library {
         }
         return persistence(multiplier) + 1;
     }
+
+    /**
+     * Compute next element in the queue.
+     *
+     * @param arr queue of strings.
+     * @param n   n'th position in queue.
+     * @return element of the queue.
+     */
+    public String nextQueue(String[] arr, int n) {
+        if (arr.length == 0) return "";
+        int next = 5, prev = 1;
+
+        while (n - next > 0) {
+            n -= next;
+            next *= 2;
+            prev *= 2;
+        }
+        return arr[(n - 1) / prev];
+    }
 }
