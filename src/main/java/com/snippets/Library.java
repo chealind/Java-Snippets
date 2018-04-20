@@ -719,4 +719,24 @@ public class Library {
         }
         return arr[(n - 1) / prev];
     }
+
+    /**
+     * Strips all text that follows any of a set of comment markers passed in.
+     *
+     * @param text    text for formatting.
+     * @param markers comment markers.
+     * @return formated string.
+     */
+    public String stripComments(String text, String[] markers) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : text.split("\\n")) {
+            for (String m : markers) {
+                if (s.contains(m)) {
+                    s = s.substring(0, s.indexOf(m));
+                }
+            }
+            sb.append("\n").append(s.replaceAll("\\s+$", ""));
+        }
+        return sb.substring(1);
+    }
 }

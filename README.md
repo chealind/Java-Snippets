@@ -13,6 +13,7 @@ Java code snippets
 * [Scramble String](#scramble-string)
 * [Colored Triangle](#colored-triangle)
 * [Sort Weight](#sort-weight)
+* [Strip Comments](#strip-comments)
 
 ### Array
 * [Binary to number](#binary-to-number)
@@ -148,6 +149,23 @@ Java code snippets
             return aWeight > bWeight ? 1 : aWeight != bWeight ? -1 : a.compareTo(b);
         });
         return String.join(" ", array);
+    }
+```
+
+### Strip Comments
+
+```java
+    public String stripComments(String text, String[] markers) {
+        StringBuilder sb = new StringBuilder();
+        for (String s : text.split("\\n")) {
+            for (String m : markers) {
+                if (s.contains(m)) {
+                    s = s.substring(0, s.indexOf(m));
+                }
+            }
+            sb.append("\n").append(s.replaceAll("\\s+$", ""));
+        }
+        return sb.substring(1);
     }
 ```
 

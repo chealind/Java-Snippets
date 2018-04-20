@@ -391,4 +391,16 @@ class LibrarySpec extends Specification {
         ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 534      || "Rajesh"
         ["Sheldon", "Leonard", "Penny", "Rajesh", "Howard"] as String[] | 28643950 || "Leonard"
     }
+
+    @Unroll
+    def "should format string comments"() {
+        expect:
+        lib.stripComments(text, markers) == result
+
+        where:
+        text                                                   | markers                 || result
+        "# some text"                                          | ["#"] as String[]       || ""
+        "apples, pears # and bananas\ngrapes\nbananas !apples" | ["#", "!"] as String[]  || "apples, pears\ngrapes\nbananas"
+        "a \n b \nc "                                          | ["#", "\$"] as String[] || "a\n b\nc"
+    }
 }
