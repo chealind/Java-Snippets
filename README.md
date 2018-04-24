@@ -30,6 +30,7 @@ Java code snippets
 * [Valid Braces](#valid-braces)
 * [Prime Factors](#prime-factors)
 * [Next In Queue](#next-in-queue)
+* [Find Routes](#find-routes)
 
 ### Number
 * [Number Expanded Form](#number-expanded-form)
@@ -432,6 +433,27 @@ Java code snippets
             prev *= 2;
         }
         return arr[(n - 1) / prev];
+    }
+```
+
+### Find Routes
+
+```java
+    public String findRoutes(String[][] routes) {
+        Map<String, String> fromTo = new HashMap<>();
+        for (String[] route : routes) fromTo.put(route[0], route[1]);
+
+        Set<String> from = new HashSet<>(fromTo.keySet());
+        from.removeAll(fromTo.values());
+        String origin = from.iterator().next();
+
+        String path = origin;
+        while (true) {
+            origin = fromTo.get(origin);
+            if (origin == null) break;
+            path += ", " + origin;
+        }
+        return path;
     }
 ```
 

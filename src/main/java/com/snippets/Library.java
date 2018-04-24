@@ -15,6 +15,7 @@ import java.util.TreeSet;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 import java.util.stream.LongStream;
 
 import static java.lang.String.format;
@@ -738,5 +739,29 @@ public class Library {
             sb.append("\n").append(s.replaceAll("\\s+$", ""));
         }
         return sb.substring(1);
+    }
+
+    /**
+     * Compute complete path based on given routes.
+     * Reference: https://www.codewars.com/kata/follow-that-spy
+     *
+     * @param routes array of routes.
+     * @return path.
+     */
+    public String findRoutes(String[][] routes) {
+        Map<String, String> fromTo = new HashMap<>();
+        for (String[] route : routes) fromTo.put(route[0], route[1]);
+
+        Set<String> from = new HashSet<>(fromTo.keySet());
+        from.removeAll(fromTo.values());
+        String origin = from.iterator().next();
+
+        String path = origin;
+        while (true) {
+            origin = fromTo.get(origin);
+            if (origin == null) break;
+            path += ", " + origin;
+        }
+        return path;
     }
 }

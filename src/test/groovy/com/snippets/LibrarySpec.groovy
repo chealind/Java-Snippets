@@ -197,9 +197,18 @@ class LibrarySpec extends Specification {
 
         where:
         n || result
-        3 || [[1, 2, 3], [8, 9, 4], [7, 6, 5]] as int[][]
-        4 || [[1, 2, 3, 4], [12, 13, 14, 5], [11, 16, 15, 6], [10, 9, 8, 7]] as int[][]
-        5 || [[1, 2, 3, 4, 5], [16, 17, 18, 19, 6], [15, 24, 25, 20, 7], [14, 23, 22, 21, 8], [13, 12, 11, 10, 9]] as int[][]
+        3 || [[1, 2, 3],
+              [8, 9, 4],
+              [7, 6, 5]] as int[][]
+        4 || [[1, 2, 3, 4],
+              [12, 13, 14, 5],
+              [11, 16, 15, 6],
+              [10, 9, 8, 7]] as int[][]
+        5 || [[1, 2, 3, 4, 5],
+              [16, 17, 18, 19, 6],
+              [15, 24, 25, 20, 7],
+              [14, 23, 22, 21, 8],
+              [13, 12, 11, 10, 9]] as int[][]
     }
 
     @Unroll
@@ -307,7 +316,9 @@ class LibrarySpec extends Specification {
         [] as int[]                                                 || ""
         [12, 15] as int[]                                           || "(2 12)(3 27)(5 15)"
         [15, 21, 24, 30, 45] as int[]                               || "(2 54)(3 135)(5 90)(7 21)"
-        [107, 158, 204, 100, 118, 123, 126, 110, 116, 100] as int[] || "(2 1032)(3 453)(5 310)(7 126)(11 110)(17 204)(29 116)(41 123)(59 118)(79 158)(107 107)"
+
+        [107, 158, 204, 100, 118, 123, 126, 110, 116, 100] as int[] ||
+                "(2 1032)(3 453)(5 310)(7 126)(11 110)(17 204)(29 116)(41 123)(59 118)(79 158)(107 107)"
     }
 
     @Unroll
@@ -332,9 +343,14 @@ class LibrarySpec extends Specification {
 
         where:
         row                                                                                 || result
-        "103 123 4444 99 2000"                                                              || "2000 103 123 4444 99"
-        "2000 10003 1234000 44444444 9999 11 11 22 123"                                     || "11 11 2000 10003 22 123 1234000 44444444 9999"
-        "71899703 200 6 91 425 4 67407 7 96488 6 4 2 7 31064 9 7920 1 34608557 27 72 18 81" || "1 2 200 4 4 6 6 7 7 18 27 72 81 9 91 425 31064 7920 67407 96488 34608557 71899703"
+        "103 123 4444 99 2000"                                                              ||
+                "2000 103 123 4444 99"
+
+        "2000 10003 1234000 44444444 9999 11 11 22 123"                                     ||
+                "11 11 2000 10003 22 123 1234000 44444444 9999"
+
+        "71899703 200 6 91 425 4 67407 7 96488 6 4 2 7 31064 9 7920 1 34608557 27 72 18 81" ||
+                "1 2 200 4 4 6 6 7 7 18 27 72 81 9 91 425 31064 7920 67407 96488 34608557 71899703"
     }
 
     @Unroll
@@ -398,9 +414,50 @@ class LibrarySpec extends Specification {
         lib.stripComments(text, markers) == result
 
         where:
-        text                                                   | markers                 || result
-        "# some text"                                          | ["#"] as String[]       || ""
-        "apples, pears # and bananas\ngrapes\nbananas !apples" | ["#", "!"] as String[]  || "apples, pears\ngrapes\nbananas"
-        "a \n b \nc "                                          | ["#", "\$"] as String[] || "a\n b\nc"
+        text                                              | markers                 || result
+        "# some text"                                     | ["#"] as String[]       || ""
+        "apples, pears # and bananas\ngrapes\nbananas !e" | ["#", "!"] as String[]  || "apples, pears\ngrapes\nbananas"
+        "a \n b \nc "                                     | ["#", "\$"] as String[] || "a\n b\nc"
+    }
+
+    @Unroll
+    def "should compute path on routes"() {
+        expect:
+        lib.findRoutes(routes) == result
+
+        where:
+        routes                                  || result
+        [["MNL", "TAG"],
+         ["CEB", "TAC"],
+         ["TAG", "CEB"],
+         ["TAC", "BOR"]] as String[][]          || "MNL, TAG, CEB, TAC, BOR"
+        [["Chicago", "Winnipeg"],
+         ["Halifax", "Montreal"],
+         ["Montreal", "Toronto"],
+         ["Toronto", "Chicago"],
+         ["Winnipeg", "Seattle"]] as String[][] || "Halifax, Montreal, Toronto, Chicago, Winnipeg, Seattle"
+        [["San Policarpo", "Oras"],
+         ["Balangiga", "Lawaan"],
+         ["Borongan", "Maydolong"],
+         ["Jipapad", "Maslog"],
+         ["Balangkayan", "Llorente"],
+         ["Mercedes", "Guiuan"],
+         ["Taft", "Sulat"],
+         ["Sulat", "San Julian"],
+         ["Arteche", "San Policarpo"],
+         ["Oras", "Dolores"],
+         ["Dolores", "Can-avid"],
+         ["Can-avid", "Taft"],
+         ["San Julian", "Borongan"],
+         ["Maydolong", "Balangkayan"],
+         ["Llorente", "Hernani"],
+         ["Hernani", "General MacArthur"],
+         ["General MacArthur", "Giporlos"],
+         ["Giporlos", "Balangiga"],
+         ["Lawaan", "Salcedo"],
+         ["Salcedo", "Mercedes"],
+         ["Maslog", "Arteche"]] as String[][]   || "Jipapad, Maslog, Arteche, San Policarpo, " +
+                "Oras, Dolores, Can-avid, Taft, Sulat, San Julian, Borongan, Maydolong, Balangkayan, " +
+                "Llorente, Hernani, General MacArthur, Giporlos, Balangiga, Lawaan, Salcedo, Mercedes, Guiuan"
     }
 }
