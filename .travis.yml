@@ -7,4 +7,4 @@ after_success:
 - ./gradlew jacocoTestReport coveralls
 
 after_failure:
-- ./gradlew clean check --debug
+- ./gradlew clean check
