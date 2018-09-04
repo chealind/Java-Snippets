@@ -1,9 +1,13 @@
+plugins {
+    id 'java'
+    id 'idea'
+    id 'jacoco'
+    id 'groovy'
+    id 'com.github.kt3k.coveralls' version '2.6.3'
+}
+
 group 'java-day'
 version '1.0-SNAPSHOT'
-
-apply plugin: 'java'
-apply plugin: 'idea'
-apply plugin: 'groovy'
 
 sourceCompatibility = 1.8
 
@@ -24,4 +28,10 @@ dependencies {
     testCompile "org.spockframework:spock-core:$spockVersion"
     testCompile "org.hamcrest:hamcrest-core:$hamcrestVersion"
     testCompile "junit:junit:$junitVersion"
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled = true
+    }
 }
