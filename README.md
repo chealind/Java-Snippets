@@ -1,5 +1,6 @@
 # Java code snippets
 [![Build Status](https://travis-ci.org/aveowl/Java-Snippets.svg?branch=master)](https://travis-ci.org/aveowl/Java-Snippets)
+[![Coverage Status](https://coveralls.io/repos/github/aveowl/Java-Snippets/badge.svg?branch=master)](https://coveralls.io/github/aveowl/Java-Snippets?branch=master)
 
 ## Table of Contents
 
